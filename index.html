@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PIXEL ARCADE - Ultimate Edition</title>
+    <title>CRAZY MATH GAMES - Ultimate Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=VT323&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -400,6 +400,16 @@
             border-radius: 10px;
         }
         
+        /* Tower Stack Canvas */
+        #towerCanvas {
+            border: 3px solid var(--neon-pink);
+            background: linear-gradient(180deg, #0a0e27 0%, #1a0033 100%);
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(255, 16, 240, 0.3);
+            cursor: pointer;
+        }
+        
         footer {
             text-align: center;
             margin-top: 60px;
@@ -413,7 +423,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>PIXEL ARCADE</h1>
+            <h1>CRAZY MATH GAMES</h1>
             <p class="tagline">>>> ULTIMATE EDITION - 8 EPIC GAMES <<<</p>
         </header>
         
@@ -500,16 +510,15 @@
                 <button onclick="startTypingGame()">START</button>
             </div>
             
-            <!-- Color Memory Game -->
+            <!-- Tower Stack Game -->
             <div class="game-card">
-                <h2 class="game-title">🌈 Color Quest</h2>
-                <p class="game-description">Remember the color sequence!</p>
+                <h2 class="game-title">🏗️ Tower Stack</h2>
+                <p class="game-description">Stack blocks perfectly! Click to drop blocks.</p>
                 <div class="game-area">
-                    <div class="color-display" id="colorDisplay"></div>
-                    <div class="color-options" id="colorOptions"></div>
-                    <p class="score" id="colorScore">Level: 1 | Best: 0</p>
+                    <canvas id="towerCanvas" width="320" height="400"></canvas>
+                    <p class="score" id="towerScore">Score: 0 | Best: 0</p>
                 </div>
-                <button onclick="startColorGame()">START</button>
+                <button onclick="startTowerGame()">BUILD</button>
             </div>
         </div>
         
@@ -1005,89 +1014,155 @@
             }
         });
         
-        // ========== COLOR MEMORY GAME ==========
-        const colors = ['#ff10f0', '#00ffff', '#ffff00', '#ff0055', '#39ff14', '#ff6600'];
-        let colorSequence = [];
-        let playerSequence = [];
-        let colorLevel = 1;
-        let colorBestLevel = 0;
-        let colorPlaying = false;
+        // ========== TOWER STACK GAME ==========
+        const towerCanvas = document.getElementById('towerCanvas');
+        const towerCtx = towerCanvas.getContext('2d');
         
-        function startColorGame() {
-            colorLevel = 1;
-            colorSequence = [];
-            playerSequence = [];
-            colorPlaying = true;
-            document.getElementById('colorScore').textContent = `Level: ${colorLevel} | Best: ${colorBestLevel}`;
-            nextColorLevel();
-        }
+        let towerBlocks = [];
+        let currentBlock = null;
+        let towerScore = 0;
+        let towerBestScore = 0;
+        let towerGameLoop = null;
+        let towerRunning = false;
+        let blockSpeed = 2;
+        let blockDirection = 1;
         
-        function nextColorLevel() {
-            playerSequence = [];
-            const newColor = colors[Math.floor(Math.random() * colors.length)];
-            colorSequence.push(newColor);
-            showColorSequence();
-        }
-        
-        function showColorSequence() {
-            const display = document.getElementById('colorDisplay');
-            const options = document.getElementById('colorOptions');
-            options.innerHTML = '';
+        function startTowerGame() {
+            towerBlocks = [{
+                x: 0,
+                y: 380,
+                width: 100,
+                height: 20,
+                color: '#00ffff'
+            }];
             
-            let i = 0;
-            const interval = setInterval(() => {
-                if (i < colorSequence.length) {
-                    display.style.backgroundColor = colorSequence[i];
-                    setTimeout(() => {
-                        display.style.backgroundColor = '#0a0e27';
-                    }, 500);
-                    i++;
-                } else {
-                    clearInterval(interval);
-                    showColorOptions();
+            towerScore = 0;
+            blockSpeed = 2;
+            document.getElementById('towerScore').textContent = `Score: ${towerScore} | Best: ${towerBestScore}`;
+            
+            spawnNewBlock();
+            
+            if (towerGameLoop) clearInterval(towerGameLoop);
+            towerRunning = true;
+            towerGameLoop = setInterval(updateTowerGame, 16);
+        }
+        
+        function spawnNewBlock() {
+            const lastBlock = towerBlocks[towerBlocks.length - 1];
+            const colors = ['#ff10f0', '#00ffff', '#ffff00', '#39ff14', '#ff6600', '#ff0055'];
+            
+            currentBlock = {
+                x: 0,
+                y: lastBlock.y - 25,
+                width: lastBlock.width,
+                height: 20,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                moving: true
+            };
+            
+            blockDirection = Math.random() > 0.5 ? 1 : -1;
+        }
+        
+        function updateTowerGame() {
+            if (currentBlock && currentBlock.moving) {
+                currentBlock.x += blockSpeed * blockDirection;
+                
+                if (currentBlock.x <= 0 || currentBlock.x + currentBlock.width >= towerCanvas.width) {
+                    blockDirection *= -1;
                 }
-            }, 800);
+            }
+            
+            drawTowerGame();
         }
         
-        function showColorOptions() {
-            const options = document.getElementById('colorOptions');
-            options.innerHTML = '';
+        function drawTowerGame() {
+            towerCtx.fillStyle = '#0a0e27';
+            towerCtx.fillRect(0, 0, towerCanvas.width, towerCanvas.height);
             
-            colors.forEach(color => {
-                const btn = document.createElement('button');
-                btn.className = 'color-btn';
-                btn.style.backgroundColor = color;
-                btn.textContent = '●';
-                btn.onclick = () => handleColorChoice(color);
-                options.appendChild(btn);
+            // Draw placed blocks
+            towerBlocks.forEach(block => {
+                towerCtx.fillStyle = block.color;
+                towerCtx.fillRect(block.x, block.y, block.width, block.height);
+                towerCtx.strokeStyle = '#ffffff';
+                towerCtx.lineWidth = 2;
+                towerCtx.strokeRect(block.x, block.y, block.width, block.height);
             });
+            
+            // Draw current moving block
+            if (currentBlock && currentBlock.moving) {
+                towerCtx.fillStyle = currentBlock.color;
+                towerCtx.fillRect(currentBlock.x, currentBlock.y, currentBlock.width, currentBlock.height);
+                towerCtx.strokeStyle = '#ffffff';
+                towerCtx.lineWidth = 2;
+                towerCtx.strokeRect(currentBlock.x, currentBlock.y, currentBlock.width, currentBlock.height);
+            }
         }
         
-        function handleColorChoice(color) {
-            playerSequence.push(color);
+        function dropBlock() {
+            if (!towerRunning || !currentBlock || !currentBlock.moving) return;
             
-            const display = document.getElementById('colorDisplay');
-            display.style.backgroundColor = color;
-            setTimeout(() => {
-                display.style.backgroundColor = '#0a0e27';
-            }, 300);
+            currentBlock.moving = false;
+            const lastBlock = towerBlocks[towerBlocks.length - 1];
             
-            if (playerSequence[playerSequence.length - 1] !== colorSequence[playerSequence.length - 1]) {
-                alert(`Wrong! You reached level ${colorLevel}`);
-                if (colorLevel > colorBestLevel) {
-                    colorBestLevel = colorLevel;
-                }
-                colorPlaying = false;
-                document.getElementById('colorOptions').innerHTML = '';
+            // Calculate overlap
+            const overlapStart = Math.max(currentBlock.x, lastBlock.x);
+            const overlapEnd = Math.min(currentBlock.x + currentBlock.width, lastBlock.x + lastBlock.width);
+            const overlapWidth = overlapEnd - overlapStart;
+            
+            if (overlapWidth <= 0) {
+                // Missed completely - game over
+                endTowerGame();
                 return;
             }
             
-            if (playerSequence.length === colorSequence.length) {
-                colorLevel++;
-                document.getElementById('colorScore').textContent = `Level: ${colorLevel} | Best: ${colorBestLevel}`;
-                setTimeout(nextColorLevel, 1000);
+            // Update block to show only overlapping part
+            currentBlock.x = overlapStart;
+            currentBlock.width = overlapWidth;
+            
+            towerBlocks.push({...currentBlock});
+            
+            towerScore++;
+            document.getElementById('towerScore').textContent = `Score: ${towerScore} | Best: ${towerBestScore}`;
+            
+            // Increase difficulty
+            blockSpeed = Math.min(2 + towerScore * 0.1, 5);
+            
+            // Check if tower is getting too tall, scroll down
+            if (currentBlock.y < 100) {
+                towerBlocks.forEach(block => {
+                    block.y += 25;
+                });
             }
+            
+            if (overlapWidth < 10) {
+                // Too small to continue
+                endTowerGame();
+                return;
+            }
+            
+            spawnNewBlock();
         }
+        
+        function endTowerGame() {
+            clearInterval(towerGameLoop);
+            towerRunning = false;
+            
+            if (towerScore > towerBestScore) {
+                towerBestScore = towerScore;
+            }
+            
+            document.getElementById('towerScore').textContent = `Score: ${towerScore} | Best: ${towerBestScore}`;
+            alert(`Tower collapsed! Final height: ${towerScore} blocks`);
+        }
+        
+        towerCanvas.addEventListener('click', dropBlock);
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' ' && towerRunning) {
+                dropBlock();
+                e.preventDefault();
+            }
+        });
         
         // ========== KEYBOARD CONTROLS ==========
         document.addEventListener('keydown', (e) => {
