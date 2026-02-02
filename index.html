@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRAZY MATH GAMES - Ultimate Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Orbitron:wght@400 ;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon-pink: #ff10f0;
@@ -140,6 +140,14 @@
         .game-card:nth-child(6) { animation-delay: 0.6s; }
         .game-card:nth-child(7) { animation-delay: 0.7s; }
         .game-card:nth-child(8) { animation-delay: 0.8s; }
+        .game-card:nth-child(9) { animation-delay: 0.9s; }
+        .game-card:nth-child(10) { animation-delay: 1.0s; }
+        .game-card:nth-child(11) { animation-delay: 1.1s; }
+        .game-card:nth-child(12) { animation-delay: 1.2s; }
+        .game-card:nth-child(13) { animation-delay: 1.3s; }
+        .game-card:nth-child(14) { animation-delay: 1.4s; }
+        .game-card:nth-child(15) { animation-delay: 1.5s; }
+        .game-card:nth-child(16) { animation-delay: 1.6s; }
         
         @keyframes fadeIn {
             to {
@@ -410,6 +418,97 @@
             cursor: pointer;
         }
         
+        /* NEW GAMES CANVAS STYLES */
+        #aimCanvas {
+            border: 3px solid var(--neon-green);
+            background: rgba(10, 14, 39, 0.9);
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+            cursor: crosshair;
+        }
+        
+        #mathCanvas {
+            border: 3px solid var(--neon-yellow);
+            background: rgba(10, 14, 39, 0.9);
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(255, 255, 0, 0.3);
+        }
+        
+        #dodgeCanvas {
+            border: 3px solid var(--arcade-red);
+            background: linear-gradient(180deg, #0f0f1e 0%, #1a0033 100%);
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.3);
+        }
+        
+        #puzzleCanvas {
+            border: 3px solid var(--neon-orange);
+            background: rgba(10, 14, 39, 0.9);
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(255, 102, 0, 0.3);
+        }
+        
+        .math-problem {
+            font-size: 2rem;
+            color: var(--neon-yellow);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .math-answer {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .math-btn {
+            min-width: 80px;
+            padding: 10px 20px;
+            font-size: 1.5rem;
+        }
+        
+        .sequence-display {
+            font-size: 2.5rem;
+            color: var(--neon-cyan);
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+            min-height: 50px;
+        }
+        
+        .simon-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 100px);
+            gap: 10px;
+            margin: 20px auto;
+        }
+        
+        .simon-btn {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.1s;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+        
+        .simon-btn.green { background: #00ff00; }
+        .simon-btn.red { background: #ff0000; }
+        .simon-btn.yellow { background: #ffff00; }
+        .simon-btn.blue { background: #0000ff; }
+        .simon-btn.lit { filter: brightness(2); box-shadow: 0 0 30px currentColor; }
+        
+        .word-scramble {
+            font-size: 2rem;
+            color: var(--neon-pink);
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+        }
+        
         footer {
             text-align: center;
             margin-top: 60px;
@@ -424,11 +523,11 @@
     <div class="container">
         <header>
             <h1>CRAZY MATH GAMES</h1>
-            <p class="tagline">>>> ULTIMATE EDITION - 8 EPIC GAMES <<<</p>
+            <p class="tagline">>>> ULTIMATE EDITION - 16 EPIC GAMES <<<</p>
         </header>
         
         <div class="games-grid">
-            <!-- Number Guessing Game -->
+            <!-- 1. Number Guessing Game -->
             <div class="game-card">
                 <h2 class="game-title">🎯 Number Hunter</h2>
                 <p class="game-description">Guess the secret number between 1-100!</p>
@@ -441,7 +540,7 @@
                 <button onclick="resetGuess()" class="secondary">RESET</button>
             </div>
             
-            <!-- Memory Match Game -->
+            <!-- 2. Memory Match Game -->
             <div class="game-card">
                 <h2 class="game-title">🧠 Memory Matrix</h2>
                 <p class="game-description">Match the emoji pairs!</p>
@@ -452,7 +551,7 @@
                 <button onclick="startMemoryGame()">NEW GAME</button>
             </div>
             
-            <!-- Reaction Time Game -->
+            <!-- 3. Reaction Time Game -->
             <div class="game-card">
                 <h2 class="game-title">⚡ Reflex Test</h2>
                 <p class="game-description">Click when the box turns bright!</p>
@@ -465,7 +564,7 @@
                 <button onclick="startReactionGame()">START</button>
             </div>
             
-            <!-- Snake Game -->
+            <!-- 4. Snake Game -->
             <div class="game-card">
                 <h2 class="game-title">🐍 Pixel Snake</h2>
                 <p class="game-description">Eat dots, don't crash! Use WASD or Arrow keys.</p>
@@ -476,7 +575,7 @@
                 <button onclick="startSnakeGame()">PLAY</button>
             </div>
             
-            <!-- Flappy Bird Style Game -->
+            <!-- 5. Flappy Bird Style Game -->
             <div class="game-card">
                 <h2 class="game-title">🚀 Rocket Rush</h2>
                 <p class="game-description">Click or press SPACE to fly! Avoid obstacles!</p>
@@ -487,7 +586,7 @@
                 <button onclick="startFlappyGame()">LAUNCH</button>
             </div>
             
-            <!-- Brick Breaker -->
+            <!-- 6. Brick Breaker -->
             <div class="game-card">
                 <h2 class="game-title">🧱 Neon Breaker</h2>
                 <p class="game-description">Break all bricks! Move with mouse or arrow keys.</p>
@@ -498,7 +597,7 @@
                 <button onclick="startBreakerGame()">SMASH</button>
             </div>
             
-            <!-- Typing Speed Test -->
+            <!-- 7. Typing Speed Test -->
             <div class="game-card">
                 <h2 class="game-title">⌨️ Speed Typer</h2>
                 <p class="game-description">Type the text as fast as you can!</p>
@@ -510,7 +609,7 @@
                 <button onclick="startTypingGame()">START</button>
             </div>
             
-            <!-- Tower Stack Game -->
+            <!-- 8. Tower Stack Game -->
             <div class="game-card">
                 <h2 class="game-title">🏗️ Tower Stack</h2>
                 <p class="game-description">Stack blocks perfectly! Click to drop blocks.</p>
@@ -520,6 +619,103 @@
                 </div>
                 <button onclick="startTowerGame()">BUILD</button>
             </div>
+            
+            <!-- 9. NEW: Aim Trainer -->
+            <div class="game-card">
+                <h2 class="game-title">🎯 Aim Trainer</h2>
+                <p class="game-description">Click the targets as fast as possible! Don't miss!</p>
+                <div class="game-area">
+                    <canvas id="aimCanvas" width="320" height="300"></canvas>
+                    <p class="score" id="aimScore">Score: 0 | Time: 0s</p>
+                </div>
+                <button onclick="startAimGame()">START</button>
+            </div>
+            
+            <!-- 10. NEW: Math Blitz -->
+            <div class="game-card">
+                <h2 class="game-title">🔢 Math Blitz</h2>
+                <p class="game-description">Solve math problems before time runs out!</p>
+                <div class="game-area">
+                    <div class="math-problem" id="mathProblem">Ready?</div>
+                    <div class="math-answer" id="mathAnswers"></div>
+                    <p class="score" id="mathScore">Score: 0 | Streak: 0</p>
+                </div>
+                <button onclick="startMathGame()">START</button>
+            </div>
+            
+            <!-- 11. NEW: Color Memory -->
+            <div class="game-card">
+                <h2 class="game-title">🌈 Color Memory</h2>
+                <p class="game-description">Watch the sequence and repeat it!</p>
+                <div class="game-area">
+                    <div class="simon-grid" id="simonGrid">
+                        <div class="simon-btn green" onclick="handleSimon(0)"></div>
+                        <div class="simon-btn red" onclick="handleSimon(1)"></div>
+                        <div class="simon-btn yellow" onclick="handleSimon(2)"></div>
+                        <div class="simon-btn blue" onclick="handleSimon(3)"></div>
+                    </div>
+                    <p class="score" id="simonScore">Level: 0</p>
+                </div>
+                <button onclick="startSimonGame()">START</button>
+            </div>
+            
+            <!-- 12. NEW: Word Scramble -->
+            <div class="game-card">
+                <h2 class="game-title">📝 Word Scramble</h2>
+                <p class="game-description">Unscramble the word as fast as you can!</p>
+                <div class="game-area">
+                    <div class="word-scramble" id="scrambleWord">READY?</div>
+                    <input type="text" id="scrambleInput" placeholder="Type answer..." disabled style="font-family: 'VT323', monospace; background: rgba(0, 255, 255, 0.1); border: 2px solid var(--neon-cyan); color: var(--neon-yellow); padding: 10px; font-size: 1.5rem; border-radius: 10px; text-align: center; width: 200px;">
+                    <p class="score" id="scrambleScore">Solved: 0</p>
+                </div>
+                <button onclick="startScrambleGame()">START</button>
+            </div>
+            
+            <!-- 13. NEW: Dodge Fall -->
+            <div class="game-card">
+                <h2 class="game-title">☄️ Dodge Fall</h2>
+                <p class="game-description">Move left/right to dodge falling asteroids!</p>
+                <div class="game-area">
+                    <canvas id="dodgeCanvas" width="320" height="400"></canvas>
+                    <p class="score" id="dodgeScore">Score: 0</p>
+                </div>
+                <button onclick="startDodgeGame()">PLAY</button>
+            </div>
+            
+            <!-- 14. NEW: Number Sequence -->
+            <div class="game-card">
+                <h2 class="game-title">🔢 Sequence Master</h2>
+                <p class="game-description">Complete the number sequence pattern!</p>
+                <div class="game-area">
+                    <div class="sequence-display" id="sequenceDisplay">?</div>
+                    <div class="math-answer" id="sequenceAnswers"></div>
+                    <p class="score" id="sequenceScore">Correct: 0</p>
+                </div>
+                <button onclick="startSequenceGame()">START</button>
+            </div>
+            
+            <!-- 15. NEW: Pattern Match -->
+            <div class="game-card">
+                <h2 class="game-title">🎨 Pattern Match</h2>
+                <p class="game-description">Memorize and recreate the pattern!</p>
+                <div class="game-area">
+                    <canvas id="puzzleCanvas" width="280" height="280"></canvas>
+                    <p class="score" id="puzzleScore">Level: 0</p>
+                </div>
+                <button onclick="startPuzzleGame()">START</button>
+            </div>
+            
+            <!-- 16. NEW: Quick Count -->
+            <div class="game-card">
+                <h2 class="game-title">🔢 Quick Count</h2>
+                <p class="game-description">Count the shapes before they disappear!</p>
+                <div class="game-area">
+                    <canvas id="countCanvas" width="320" height="250"></canvas>
+                    <div class="math-answer" id="countAnswers"></div>
+                    <p class="score" id="countScore">Correct: 0</p>
+                </div>
+                <button onclick="startCountGame()">START</button>
+            </div>
         </div>
         
         <footer>
@@ -528,7 +724,9 @@
     </div>
     
     <script>
-        // ========== NUMBER GUESSING GAME ==========
+        // ========== ORIGINAL 8 GAMES ==========
+        
+        // ========== 1. NUMBER GUESSING GAME ==========
         let secretNumber = Math.floor(Math.random() * 100) + 1;
         let attempts = 0;
         
@@ -562,7 +760,7 @@
             if (e.key === 'Enter') checkGuess();
         });
         
-        // ========== MEMORY GAME ==========
+        // ========== 2. MEMORY GAME ==========
         const emojis = ['🚀', '⭐', '🎮', '👾', '🔥', '💎', '⚡', '🌟'];
         let memoryCards = [];
         let flippedCards = [];
@@ -621,7 +819,7 @@
         
         startMemoryGame();
         
-        // ========== REACTION TIME GAME ==========
+        // ========== 3. REACTION TIME GAME ==========
         let reactionStartTime;
         let reactionTimeout;
         let bestTime = Infinity;
@@ -669,7 +867,7 @@
             waitingForReaction = false;
         }
         
-        // ========== SNAKE GAME ==========
+        // ========== 4. SNAKE GAME ==========
         const snakeCanvas = document.getElementById('snakeCanvas');
         const snakeCtx = snakeCanvas.getContext('2d');
         const gridSize = 20;
@@ -754,7 +952,7 @@
         
         drawSnake();
         
-        // ========== FLAPPY BIRD STYLE GAME ==========
+        // ========== 5. FLAPPY BIRD STYLE GAME ==========
         const flappyCanvas = document.getElementById('flappyCanvas');
         const flappyCtx = flappyCanvas.getContext('2d');
         
@@ -842,14 +1040,7 @@
             if (flappyRunning) bird.velocity = jump;
         });
         
-        document.addEventListener('keydown', (e) => {
-            if (e.key === ' ' && flappyRunning) {
-                bird.velocity = jump;
-                e.preventDefault();
-            }
-        });
-        
-        // ========== BRICK BREAKER ==========
+        // ========== 6. BRICK BREAKER ==========
         const breakerCanvas = document.getElementById('breakerCanvas');
         const breakerCtx = breakerCanvas.getContext('2d');
         
@@ -973,7 +1164,7 @@
             }
         });
         
-        // ========== TYPING SPEED TEST ==========
+        // ========== 7. TYPING SPEED TEST ==========
         const typingTexts = [
             "The quick brown fox jumps over the lazy dog.",
             "Programming is the art of algorithm design and the craft of debugging.",
@@ -1014,7 +1205,7 @@
             }
         });
         
-        // ========== TOWER STACK GAME ==========
+        // ========== 8. TOWER STACK GAME ==========
         const towerCanvas = document.getElementById('towerCanvas');
         const towerCtx = towerCanvas.getContext('2d');
         
@@ -1079,7 +1270,6 @@
             towerCtx.fillStyle = '#0a0e27';
             towerCtx.fillRect(0, 0, towerCanvas.width, towerCanvas.height);
             
-            // Draw placed blocks
             towerBlocks.forEach(block => {
                 towerCtx.fillStyle = block.color;
                 towerCtx.fillRect(block.x, block.y, block.width, block.height);
@@ -1088,7 +1278,6 @@
                 towerCtx.strokeRect(block.x, block.y, block.width, block.height);
             });
             
-            // Draw current moving block
             if (currentBlock && currentBlock.moving) {
                 towerCtx.fillStyle = currentBlock.color;
                 towerCtx.fillRect(currentBlock.x, currentBlock.y, currentBlock.width, currentBlock.height);
@@ -1104,18 +1293,15 @@
             currentBlock.moving = false;
             const lastBlock = towerBlocks[towerBlocks.length - 1];
             
-            // Calculate overlap
             const overlapStart = Math.max(currentBlock.x, lastBlock.x);
             const overlapEnd = Math.min(currentBlock.x + currentBlock.width, lastBlock.x + lastBlock.width);
             const overlapWidth = overlapEnd - overlapStart;
             
             if (overlapWidth <= 0) {
-                // Missed completely - game over
                 endTowerGame();
                 return;
             }
             
-            // Update block to show only overlapping part
             currentBlock.x = overlapStart;
             currentBlock.width = overlapWidth;
             
@@ -1124,10 +1310,8 @@
             towerScore++;
             document.getElementById('towerScore').textContent = `Score: ${towerScore} | Best: ${towerBestScore}`;
             
-            // Increase difficulty
             blockSpeed = Math.min(2 + towerScore * 0.1, 5);
             
-            // Check if tower is getting too tall, scroll down
             if (currentBlock.y < 100) {
                 towerBlocks.forEach(block => {
                     block.y += 25;
@@ -1135,7 +1319,6 @@
             }
             
             if (overlapWidth < 10) {
-                // Too small to continue
                 endTowerGame();
                 return;
             }
@@ -1157,16 +1340,573 @@
         
         towerCanvas.addEventListener('click', dropBlock);
         
-        document.addEventListener('keydown', (e) => {
-            if (e.key === ' ' && towerRunning) {
-                dropBlock();
-                e.preventDefault();
+        // ========== NEW 8 GAMES ==========
+        
+        // ========== 9. AIM TRAINER ==========
+        const aimCanvas = document.getElementById('aimCanvas');
+        const aimCtx = aimCanvas.getContext('2d');
+        let aimScore = 0;
+        let aimStartTime;
+        let aimGameLoop;
+        let aimRunning = false;
+        let target = null;
+        let aimTimeLeft = 30;
+        
+        function startAimGame() {
+            aimScore = 0;
+            aimTimeLeft = 30;
+            aimStartTime = Date.now();
+            document.getElementById('aimScore').textContent = `Score: 0 | Time: 30s`;
+            
+            spawnTarget();
+            
+            if (aimGameLoop) clearInterval(aimGameLoop);
+            aimRunning = true;
+            aimGameLoop = setInterval(updateAimGame, 1000);
+        }
+        
+        function spawnTarget() {
+            target = {
+                x: Math.random() * (aimCanvas.width - 40) + 20,
+                y: Math.random() * (aimCanvas.height - 40) + 20,
+                radius: 25
+            };
+            drawAimGame();
+        }
+        
+        function updateAimGame() {
+            aimTimeLeft--;
+            document.getElementById('aimScore').textContent = `Score: ${aimScore} | Time: ${aimTimeLeft}s`;
+            
+            if (aimTimeLeft <= 0) {
+                endAimGame();
+            }
+        }
+        
+        function drawAimGame() {
+            aimCtx.fillStyle = '#0a0e27';
+            aimCtx.fillRect(0, 0, aimCanvas.width, aimCanvas.height);
+            
+            if (target) {
+                aimCtx.fillStyle = '#00ff00';
+                aimCtx.beginPath();
+                aimCtx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
+                aimCtx.fill();
+                
+                aimCtx.fillStyle = '#ffffff';
+                aimCtx.beginPath();
+                aimCtx.arc(target.x, target.y, target.radius * 0.5, 0, Math.PI * 2);
+                aimCtx.fill();
+            }
+        }
+        
+        aimCanvas.addEventListener('mousedown', (e) => {
+            if (!aimRunning || !target) return;
+            
+            const rect = aimCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const dist = Math.sqrt((x - target.x) ** 2 + (y - target.y) ** 2);
+            
+            if (dist <= target.radius) {
+                aimScore++;
+                spawnTarget();
             }
         });
+        
+        function endAimGame() {
+            clearInterval(aimGameLoop);
+            aimRunning = false;
+            alert(`Time's up! Targets hit: ${aimScore}`);
+        }
+        
+        // ========== 10. MATH BLITZ ==========
+        let mathScore = 0;
+        let mathStreak = 0;
+        let mathRunning = false;
+        
+        function startMathGame() {
+            mathScore = 0;
+            mathStreak = 0;
+            mathRunning = true;
+            document.getElementById('mathScore').textContent = 'Score: 0 | Streak: 0';
+            nextMathProblem();
+        }
+        
+        function nextMathProblem() {
+            if (!mathRunning) return;
+            
+            const ops = ['+', '-', '*'];
+            const op = ops[Math.floor(Math.random() * ops.length)];
+            let a, b, answer;
+            
+            switch(op) {
+                case '+':
+                    a = Math.floor(Math.random() * 20) + 1;
+                    b = Math.floor(Math.random() * 20) + 1;
+                    answer = a + b;
+                    break;
+                case '-':
+                    a = Math.floor(Math.random() * 20) + 10;
+                    b = Math.floor(Math.random() * a);
+                    answer = a - b;
+                    break;
+                case '*':
+                    a = Math.floor(Math.random() * 10) + 2;
+                    b = Math.floor(Math.random() * 10) + 2;
+                    answer = a * b;
+                    break;
+            }
+            
+            document.getElementById('mathProblem').textContent = `${a} ${op} ${b} = ?`;
+            
+            const answers = [answer];
+            while (answers.length < 4) {
+                const wrong = answer + Math.floor(Math.random() * 20) - 10;
+                if (!answers.includes(wrong) && wrong >= 0) answers.push(wrong);
+            }
+            answers.sort(() => Math.random() - 0.5);
+            
+            const container = document.getElementById('mathAnswers');
+            container.innerHTML = '';
+            answers.forEach(ans => {
+                const btn = document.createElement('button');
+                btn.className = 'math-btn';
+                btn.textContent = ans;
+                btn.onclick = () => checkMathAnswer(ans, answer);
+                container.appendChild(btn);
+            });
+        }
+        
+        function checkMathAnswer(selected, correct) {
+            if (selected === correct) {
+                mathScore += 10 + mathStreak;
+                mathStreak++;
+            } else {
+                mathStreak = 0;
+            }
+            document.getElementById('mathScore').textContent = `Score: ${mathScore} | Streak: ${mathStreak}`;
+            nextMathProblem();
+        }
+        
+        // ========== 11. COLOR MEMORY (SIMON) ==========
+        let simonSequence = [];
+        let playerSequence = [];
+        let simonLevel = 0;
+        let simonRunning = false;
+        let simonColors = ['green', 'red', 'yellow', 'blue'];
+        
+        function startSimonGame() {
+            simonSequence = [];
+            playerSequence = [];
+            simonLevel = 0;
+            simonRunning = true;
+            document.getElementById('simonScore').textContent = 'Level: 0';
+            nextSimonLevel();
+        }
+        
+        function nextSimonLevel() {
+            simonLevel++;
+            document.getElementById('simonScore').textContent = `Level: ${simonLevel}`;
+            playerSequence = [];
+            simonSequence.push(Math.floor(Math.random() * 4));
+            playSimonSequence();
+        }
+        
+        function playSimonSequence() {
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i >= simonSequence.length) {
+                    clearInterval(interval);
+                    return;
+                }
+                flashSimonButton(simonSequence[i]);
+                i++;
+            }, 800);
+        }
+        
+        function flashSimonButton(index) {
+            const buttons = document.querySelectorAll('.simon-btn');
+            buttons[index].classList.add('lit');
+            setTimeout(() => buttons[index].classList.remove('lit'), 400);
+        }
+        
+        function handleSimon(index) {
+            if (!simonRunning) return;
+            
+            flashSimonButton(index);
+            playerSequence.push(index);
+            
+            if (playerSequence[playerSequence.length - 1] !== simonSequence[playerSequence.length - 1]) {
+                alert(`Game Over! You reached level ${simonLevel}`);
+                simonRunning = false;
+                return;
+            }
+            
+            if (playerSequence.length === simonSequence.length) {
+                setTimeout(nextSimonLevel, 1000);
+            }
+        }
+        
+        // ========== 12. WORD SCRAMBLE ==========
+        const words = ['GALAXY', 'NEBULA', 'QUASAR', 'COSMOS', 'ORBIT', 'STELLAR', 'ASTRAL', 'VOID'];
+        let currentWord = '';
+        let scrambleScore = 0;
+        let scrambleRunning = false;
+        
+        function startScrambleGame() {
+            scrambleScore = 0;
+            scrambleRunning = true;
+            document.getElementById('scrambleScore').textContent = 'Solved: 0';
+            nextScrambleWord();
+        }
+        
+        function nextScrambleWord() {
+            currentWord = words[Math.floor(Math.random() * words.length)];
+            const scrambled = currentWord.split('').sort(() => Math.random() - 0.5).join('');
+            document.getElementById('scrambleWord').textContent = scrambled;
+            document.getElementById('scrambleInput').value = '';
+            document.getElementById('scrambleInput').disabled = false;
+            document.getElementById('scrambleInput').focus();
+        }
+        
+        document.getElementById('scrambleInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && scrambleRunning) {
+                const guess = document.getElementById('scrambleInput').value.toUpperCase();
+                if (guess === currentWord) {
+                    scrambleScore++;
+                    document.getElementById('scrambleScore').textContent = `Solved: ${scrambleScore}`;
+                    nextScrambleWord();
+                } else {
+                    document.getElementById('scrambleWord').style.color = '#ff0055';
+                    setTimeout(() => {
+                        document.getElementById('scrambleWord').style.color = 'var(--neon-pink)';
+                    }, 500);
+                }
+            }
+        });
+        
+        // ========== 13. DODGE FALL ==========
+        const dodgeCanvas = document.getElementById('dodgeCanvas');
+        const dodgeCtx = dodgeCanvas.getContext('2d');
+        let player = { x: 160, y: 360, width: 30, height: 30 };
+        let asteroids = [];
+        let dodgeScore = 0;
+        let dodgeGameLoop;
+        let dodgeRunning = false;
+        let dodgeKeys = {};
+        
+        function startDodgeGame() {
+            player = { x: 160, y: 360, width: 30, height: 30 };
+            asteroids = [];
+            dodgeScore = 0;
+            document.getElementById('dodgeScore').textContent = 'Score: 0';
+            
+            if (dodgeGameLoop) clearInterval(dodgeGameLoop);
+            dodgeRunning = true;
+            dodgeGameLoop = setInterval(updateDodge, 20);
+        }
+        
+        function updateDodge() {
+            if (dodgeKeys['ArrowLeft'] && player.x > 0) player.x -= 5;
+            if (dodgeKeys['ArrowRight'] && player.x < dodgeCanvas.width - player.width) player.x += 5;
+            
+            if (Math.random() < 0.05) {
+                asteroids.push({
+                    x: Math.random() * (dodgeCanvas.width - 30),
+                    y: -30,
+                    width: 30,
+                    height: 30,
+                    speed: 3 + Math.random() * 2
+                });
+            }
+            
+            asteroids.forEach((asteroid, index) => {
+                asteroid.y += asteroid.speed;
+                
+                if (asteroid.y > dodgeCanvas.height) {
+                    asteroids.splice(index, 1);
+                    dodgeScore++;
+                    document.getElementById('dodgeScore').textContent = `Score: ${dodgeScore}`;
+                }
+                
+                if (player.x < asteroid.x + asteroid.width &&
+                    player.x + player.width > asteroid.x &&
+                    player.y < asteroid.y + asteroid.height &&
+                    player.y + player.height > asteroid.y) {
+                    endDodgeGame();
+                }
+            });
+            
+            drawDodge();
+        }
+        
+        function drawDodge() {
+            dodgeCtx.fillStyle = '#0f0f1e';
+            dodgeCtx.fillRect(0, 0, dodgeCanvas.width, dodgeCanvas.height);
+            
+            dodgeCtx.fillStyle = '#00ffff';
+            dodgeCtx.fillRect(player.x, player.y, player.width, player.height);
+            
+            asteroids.forEach(asteroid => {
+                dodgeCtx.fillStyle = '#ff0055';
+                dodgeCtx.fillRect(asteroid.x, asteroid.y, asteroid.width, asteroid.height);
+            });
+        }
+        
+        function endDodgeGame() {
+            clearInterval(dodgeGameLoop);
+            dodgeRunning = false;
+            alert(`Hit! Final score: ${dodgeScore}`);
+        }
+        
+        // ========== 14. NUMBER SEQUENCE ==========
+        let sequenceScore = 0;
+        let sequenceRunning = false;
+        
+        function startSequenceGame() {
+            sequenceScore = 0;
+            sequenceRunning = true;
+            document.getElementById('sequenceScore').textContent = 'Correct: 0';
+            nextSequence();
+        }
+        
+        function nextSequence() {
+            const types = ['add', 'multiply', 'power'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            let seq = [];
+            let answer;
+            
+            switch(type) {
+                case 'add':
+                    const start = Math.floor(Math.random() * 10) + 1;
+                    const step = Math.floor(Math.random() * 5) + 2;
+                    seq = [start, start + step, start + step * 2, start + step * 3];
+                    answer = start + step * 4;
+                    break;
+                case 'multiply':
+                    const mult = Math.floor(Math.random() * 5) + 2;
+                    seq = [mult, mult * mult, mult * mult * mult];
+                    answer = mult * mult * mult * mult;
+                    break;
+                case 'power':
+                    const base = Math.floor(Math.random() * 4) + 2;
+                    seq = [base, base * base, base * base * base];
+                    answer = base * base * base * base;
+                    break;
+            }
+            
+            document.getElementById('sequenceDisplay').textContent = seq.join(', ') + ', ?';
+            
+            const answers = [answer];
+            while (answers.length < 4) {
+                const wrong = answer + Math.floor(Math.random() * 20) - 10;
+                if (!answers.includes(wrong) && wrong > 0) answers.push(wrong);
+            }
+            answers.sort(() => Math.random() - 0.5);
+            
+            const container = document.getElementById('sequenceAnswers');
+            container.innerHTML = '';
+            answers.forEach(ans => {
+                const btn = document.createElement('button');
+                btn.className = 'math-btn';
+                btn.textContent = ans;
+                btn.onclick = () => checkSequenceAnswer(ans, answer);
+                container.appendChild(btn);
+            });
+        }
+        
+        function checkSequenceAnswer(selected, correct) {
+            if (selected === correct) {
+                sequenceScore++;
+                document.getElementById('sequenceScore').textContent = `Correct: ${sequenceScore}`;
+            }
+            nextSequence();
+        }
+        
+        // ========== 15. PATTERN MATCH ==========
+        const puzzleCanvas = document.getElementById('puzzleCanvas');
+        const puzzleCtx = puzzleCanvas.getContext('2d');
+        let puzzleGrid = [];
+        let playerGrid = [];
+        let puzzleLevel = 0;
+        let puzzleShowing = false;
+        
+        function startPuzzleGame() {
+            puzzleLevel = 1;
+            document.getElementById('puzzleScore').textContent = 'Level: 1';
+            nextPuzzleLevel();
+        }
+        
+        function nextPuzzleLevel() {
+            const size = Math.min(3 + Math.floor(puzzleLevel / 3), 5);
+            puzzleGrid = Array(size).fill().map(() => Array(size).fill(false));
+            playerGrid = Array(size).fill().map(() => Array(size).fill(false));
+            
+            // Generate random pattern
+            for (let i = 0; i < size * size / 2 + puzzleLevel; i++) {
+                const r = Math.floor(Math.random() * size);
+                const c = Math.floor(Math.random() * size);
+                puzzleGrid[r][c] = true;
+            }
+            
+            puzzleShowing = true;
+            drawPuzzle();
+            
+            setTimeout(() => {
+                puzzleShowing = false;
+                drawPuzzle();
+            }, 2000 + puzzleLevel * 500);
+        }
+        
+        function drawPuzzle() {
+            puzzleCtx.fillStyle = '#0a0e27';
+            puzzleCtx.fillRect(0, 0, puzzleCanvas.width, puzzleCanvas.height);
+            
+            const size = puzzleGrid.length;
+            const cellSize = 250 / size;
+            const offset = (puzzleCanvas.width - size * cellSize) / 2;
+            
+            for (let r = 0; r < size; r++) {
+                for (let c = 0; c < size; c++) {
+                    const x = offset + c * cellSize;
+                    const y = offset + r * cellSize;
+                    
+                    if (puzzleShowing) {
+                        puzzleCtx.fillStyle = puzzleGrid[r][c] ? '#00ffff' : '#1a1a3e';
+                    } else {
+                        puzzleCtx.fillStyle = playerGrid[r][c] ? '#ff10f0' : '#1a1a3e';
+                    }
+                    
+                    puzzleCtx.fillRect(x, y, cellSize - 4, cellSize - 4);
+                    puzzleCtx.strokeStyle = '#00ffff';
+                    puzzleCtx.strokeRect(x, y, cellSize - 4, cellSize - 4);
+                }
+            }
+        }
+        
+        puzzleCanvas.addEventListener('click', (e) => {
+            if (puzzleShowing) return;
+            
+            const rect = puzzleCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const size = puzzleGrid.length;
+            const cellSize = 250 / size;
+            const offset = (puzzleCanvas.width - size * cellSize) / 2;
+            
+            const c = Math.floor((x - offset) / cellSize);
+            const r = Math.floor((y - offset) / cellSize);
+            
+            if (r >= 0 && r < size && c >= 0 && c < size) {
+                playerGrid[r][c] = !playerGrid[r][c];
+                drawPuzzle();
+                
+                if (checkPuzzleMatch()) {
+                    puzzleLevel++;
+                    document.getElementById('puzzleScore').textContent = `Level: ${puzzleLevel}`;
+                    setTimeout(nextPuzzleLevel, 500);
+                }
+            }
+        });
+        
+        function checkPuzzleMatch() {
+            const size = puzzleGrid.length;
+            for (let r = 0; r < size; r++) {
+                for (let c = 0; c < size; c++) {
+                    if (puzzleGrid[r][c] !== playerGrid[r][c]) return false;
+                }
+            }
+            return true;
+        }
+        
+        // ========== 16. QUICK COUNT ==========
+        let countScore = 0;
+        let countRunning = false;
+        let shapesToCount = [];
+        
+        function startCountGame() {
+            countScore = 0;
+            countRunning = true;
+            document.getElementById('countScore').textContent = 'Correct: 0';
+            nextCountRound();
+        }
+        
+        function nextCountRound() {
+            shapesToCount = [];
+            const count = Math.floor(Math.random() * 8) + 3;
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = 320;
+            canvas.height = 250;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < count; i++) {
+                const shape = Math.random() > 0.5 ? 'circle' : 'square';
+                const x = Math.random() * 250 + 20;
+                const y = Math.random() * 180 + 20;
+                
+                ctx.fillStyle = ['#ff10f0', '#00ffff', '#ffff00', '#39ff14'][Math.floor(Math.random() * 4)];
+                
+                if (shape === 'circle') {
+                    ctx.beginPath();
+                    ctx.arc(x, y, 15, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillRect(x - 15, y - 15, 30, 30);
+                }
+            }
+            
+            // Copy to display canvas
+            const displayCanvas = document.getElementById('countCanvas');
+            const displayCtx = displayCanvas.getContext('2d');
+            displayCtx.drawImage(canvas, 0, 0);
+            
+            // Hide after brief moment
+            setTimeout(() => {
+                displayCtx.fillStyle = '#0a0e27';
+                displayCtx.fillRect(0, 0, displayCanvas.width, displayCanvas.height);
+                displayCtx.fillStyle = '#00ffff';
+                displayCtx.font = '30px VT323';
+                displayCtx.textAlign = 'center';
+                displayCtx.fillText('How many shapes?', displayCanvas.width / 2, displayCanvas.height / 2);
+            }, 1500);
+            
+            // Generate answer buttons
+            const answers = [count];
+            while (answers.length < 4) {
+                const wrong = count + Math.floor(Math.random() * 6) - 3;
+                if (!answers.includes(wrong) && wrong > 0) answers.push(wrong);
+            }
+            answers.sort(() => Math.random() - 0.5);
+            
+            const container = document.getElementById('countAnswers');
+            container.innerHTML = '';
+            answers.forEach(ans => {
+                const btn = document.createElement('button');
+                btn.className = 'math-btn';
+                btn.textContent = ans;
+                btn.onclick = () => checkCountAnswer(ans, count);
+                container.appendChild(btn);
+            });
+        }
+        
+        function checkCountAnswer(selected, correct) {
+            if (selected === correct) {
+                countScore++;
+                document.getElementById('countScore').textContent = `Correct: ${countScore}`;
+            }
+            nextCountRound();
+        }
         
         // ========== KEYBOARD CONTROLS ==========
         document.addEventListener('keydown', (e) => {
             keys[e.key] = true;
+            dodgeKeys[e.key] = true;
             
             if (snakeGameRunning) {
                 switch(e.key) {
@@ -1192,10 +1932,21 @@
                         break;
                 }
             }
+            
+            if (e.key === ' ' && flappyRunning) {
+                bird.velocity = jump;
+                e.preventDefault();
+            }
+            
+            if (e.key === ' ' && towerRunning) {
+                dropBlock();
+                e.preventDefault();
+            }
         });
         
         document.addEventListener('keyup', (e) => {
             keys[e.key] = false;
+            dodgeKeys[e.key] = false;
         });
     </script>
 </body>
